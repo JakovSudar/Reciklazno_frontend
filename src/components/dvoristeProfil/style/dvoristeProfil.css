@@ -1,0 +1,10 @@
+.ant-layout-sider-zero-width-trigger{
+    top:2px !important
+}
+
+.ant-layout-content{
+    padding : 46px;
+    display: flex;
+    justify-content: center;
+    
+}

@@ -1,0 +1,72 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+    border-radius: 10px;
+}
+
+.oibInput{
+    border-top-left-radius : 20px;
+    border-bottom-left-radius : 20px;
+    border: 1px solid cornflowerblue;
+    width: 200px;
+    border-right: 0px;
+    font-weight:bold;
+    font-size : 1.2rem    
+}
+
+.oibContainer{
+    display: flex;
+    justify-content: center;
+
+}
+.oibBtn{
+    border-top-right-radius: 20px ;
+    border-bottom-right-radius: 20px;
+    border-left: 1px solid #89c6ff !important
+}
+
+.oibBtn:hover:hover{
+    background-color: #1890ff !important;
+    color: white
+}
+
+.newPersonInput{
+    border-radius: 5px;
+    width: 300px;
+    margin-top: 20px;
+}
+.newPersonForm{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.newPersonBtn{
+    border-color: #22BB33 !important;
+    color: #22BB33 !important;
+    margin-top: 15px;
+    width: 120px;
+    text-align: center;    
+}
+.newPersonBtn:hover{
+    background-color: #22BB33 !important;
+    color: white !important;
+}
+
+.recyclation-form{
+    display: flex;
+    
+}
+#dynamic_form_item{
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    flex-direction: column;   
+    
+}
