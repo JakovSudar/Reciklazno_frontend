@@ -1,31 +1,46 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Input, Button, notification } from 'antd';
 import ExistingPersonForm from './ExistingPersonForm'
-import PersonInfo from './PersonInfo'
+import PersonInfo from '../PersonInfo'
+import ProfileContext from '../../../context/profile-context'
+import RecContext from '../../../context/recyclation-context'
 import NewPersonForm from './NewPersonForm'
+import Recyclations from '../Recyclations'
 import './style/dodaj.css'
-import {baseURL} from '../../constants'
+import {baseURL} from '../../../constants'
 import{
     RightCircleOutlined
 }from "@ant-design/icons";
 
 const DodajReciklazu = props => {
 
+    const {user, dispatch} = useContext(ProfileContext)
+    const {recyclations} = useContext(RecContext)
+
     const [loading, setLoading] = useState(false)
     const [oib, setOib] = useState("")
     const [disabledInput, setDisabledInput] = useState(false)
     const [newPerson, setNewPerson] = useState(false)
     const [oldPerson, setOldPerson] = useState(false)
-    const [user, setUser] = useState("")
+    const [added, setAdded] = useState(false)
     
-    const userIsAdded = (user) =>{       
-        console.log("added user: ", user) 
-        setUser(user)
-        setNewPerson(false)
-        setOldPerson(true)
-        
-    }
+    useEffect(()=>{        
+        if(user.length !== 0){
+            setOldPerson(true)
+            setNewPerson(false)
+        }        
+    },[user])
 
+    useEffect(()=>{
+        if(recyclations.length!==0){
+            setNewPerson(false)
+            setOldPerson(false)
+            setOib("")     
+            setAdded(true)       
+        }
+    },[recyclations])
+
+    
     const clicked = ()=>{
         if(oib.length <11 || oib.length >12){
             notification.error({
@@ -75,15 +90,16 @@ const DodajReciklazu = props => {
                         return res.json()                         
                     }                        
                 })
-                .then(res => {  
-                    userIsAdded(res)                                                                    
+                .then(user => {                      
+                    if(user !== null){                                               
+                        dispatch({type:'ADD_USER', user})                                                                                                               
+                    }    
                     setLoading(false)
-                    setDisabledInput(false)                                
+                    setDisabledInput(false)                                                
                 })
                 .catch((e) =>{
                     setLoading(false)
-                    setDisabledInput(false)  
-                    console.log(e)
+                    setDisabledInput(false)                      
                     notification.error({
                         style: {
                             border: "2px solid red"
@@ -107,6 +123,7 @@ const DodajReciklazu = props => {
                 placeholder= "Unesite OIB"
                 onPressEnter={clicked}
                 onChange = {(e)=>{
+                    setAdded(false)
                     setNewPerson(false)
                     setOldPerson(false)
                     setOib(e.target.value)
@@ -125,9 +142,10 @@ const DodajReciklazu = props => {
                     Unesi
                 </Button>  
             </div> 
-            {oldPerson && <PersonInfo user={user}/>}
-            {newPerson && <NewPersonForm oib={oib} userIsAdded={userIsAdded}/> }                      
-            {oldPerson && <ExistingPersonForm user={user}/> }        
+            {oldPerson && <PersonInfo />}
+            {newPerson && <NewPersonForm oib={oib} /> }                      
+            {oldPerson && <ExistingPersonForm /> }    
+            {added && <Recyclations/>}               
         </div>
     )
 }

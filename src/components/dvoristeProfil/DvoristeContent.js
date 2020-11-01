@@ -1,21 +1,18 @@
 import React from 'react'
+import { Route} from 'react-router-dom';
 import Profil  from './Profil'
-import DodajReciklazu from './DodajReciklazu'
+import DodajReciklazu from './dodajReciklazu/DodajReciklazu'
 import DnevnaStatistika from './DnevnaStatistika'
 import MjesecnaStatistika from './MjesecnaStatistika'
 import Zajednica from './Zajednica'
-const DvoristeContent = ({choosen}) => {   
-        
-            switch (choosen) {                
-                case "1" : return  <Profil/>;    
-                case "2" : return <DodajReciklazu/>; 
-                case "3" : return < DnevnaStatistika /> ; 
-                case "4" : return < MjesecnaStatistika />;         
-                case "5" : return < Zajednica />;                
-                default:    return choosen; 
-            }
-        
-    
-}
+const DvoristeContent = () => (       
+    <>
+        <Route path="/profile/detail-profile" component={Profil} />
+        <Route path="/profile/add-recyclation" component={DodajReciklazu} /> 
+        <Route path="/profile/daily" component={DnevnaStatistika} />      
+        <Route path="/profile/monthly" component={MjesecnaStatistika} />      
+        <Route path="/profile/community" component={Zajednica} />                       
+    </>         
+)
 
 export default DvoristeContent

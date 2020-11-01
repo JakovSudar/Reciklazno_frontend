@@ -1,31 +1,18 @@
-import React,{useState} from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "antd/dist/antd.css";
 import DvoristeContent from "./DvoristeContent"
-
+import { Link, Redirect } from 'react-router-dom';
 import './style/dvoristeProfil.css'
-
-
-
 import { Layout, Menu } from "antd";
-
-import {
-    PlusOutlined,
-    BarChartOutlined,
-    PoweroffOutlined, 
-    CalendarOutlined,
-    TeamOutlined,
-    UserOutlined,
-    HomeOutlined,   
-  } from "@ant-design/icons";
-  
-
+import ProfileMenu from './ProfilMenu'  
 const {  Content, Sider } = Layout;
-
-
 const DvoristeProfil = () =>{
-  const [selected, setSelected] = useState("2")
-    return(    
+  
+    
+  if(localStorage.getItem('token') === null){    
+    return (<Redirect to='/login' />)
+  }else
+  return(          
     <Layout>
       <Sider
       breakpoint={"sm"}
@@ -34,46 +21,12 @@ const DvoristeProfil = () =>{
         height: "100vh"
       }}
       >      
-        <Menu 
-        theme="dark" 
-        mode="inline" 
-        defaultSelectedKeys={["1"]}
-        onClick = {
-          ({key})=>{
-              if(key === "0"){
-
-              }else
-                setSelected(key)
-          }
-        }     
-       >
-        <Menu.Item key="0" icon={<HomeOutlined />}>
-        Početna
-      </Menu.Item>
-        <Menu.Item key="1" icon={<UserOutlined />}>
-        Profil
-      </Menu.Item>
-      <Menu.Item key="2" icon={<PlusOutlined /> }>
-        Dodaj reciklazu
-      </Menu.Item>
-      <Menu.Item key="3" icon={<BarChartOutlined />}>
-        Dnevna statistika
-      </Menu.Item>
-      <Menu.Item key="4" icon={<CalendarOutlined />}>
-        Mjesečna statistika
-      </Menu.Item>
-      <Menu.Item key="5" icon={<TeamOutlined />}>
-        Vaša zajednica
-      </Menu.Item>
-      <Menu.Item key="6" icon={<PoweroffOutlined />}>
-        Odjava
-      </Menu.Item>        
-        </Menu>
+        <ProfileMenu/>
       </Sider>
       <Content>
-       <DvoristeContent
-        choosen = {selected}
-        />       
+       <DvoristeContent       
+       />  
+        
       </Content>      
     </Layout>
     

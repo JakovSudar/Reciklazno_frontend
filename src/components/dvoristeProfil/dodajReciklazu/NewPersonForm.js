@@ -1,12 +1,12 @@
 import React,{useState, useContext} from 'react'
-import { Input, Button, Form,message } from 'antd';
-import {baseURL} from '../../constants'
+import { Input, Button, Form,message,notification } from 'antd';
+import {baseURL} from '../../../constants'
 import{
     CheckOutlined
 }from "@ant-design/icons"
-import ProfileContext from '../../context/profile-context'
+import ProfileContext from '../../../context/profile-context'
 
-const NewPersonForm = ({oib, userIsAdded}) => {
+const NewPersonForm = ({oib}) => {
 
     const {dispatch} = useContext(ProfileContext)
 
@@ -27,7 +27,7 @@ const NewPersonForm = ({oib, userIsAdded}) => {
                 email,
                 oib
             }
-            console.log(JSON.stringify(requestBody))
+            
             fetch(baseURL+"api/users/",
             {
                 method: "POST",
@@ -39,12 +39,33 @@ const NewPersonForm = ({oib, userIsAdded}) => {
             })
             .then(res=>{
                 if(res.status !==200){
-
-                }else{
-                    res.json()
+                    return null
+                }else{                    
+                    return res.json()
                 }
             })
-            .then(res=> userIsAdded(res))
+            .then(res=> {
+                if(res !== null){       
+                    dispatch({
+                        type:'ADD_USER',
+                        user: res
+                    })                               
+                }                              
+            })
+            .catch((e) =>{                
+                console.log(e)
+                notification.error({
+                    style: {
+                        border: "2px solid red"
+                    },
+                    duration: "2",
+                    message: `Dogodila se greška`,
+                    description:
+                      e.message,
+                    placement: "bottomRight"
+                });
+            })          
+           
             message.success("Korisnik dodan!", 1)          
         }
     }   

@@ -17,6 +17,7 @@ input{
     font-size : 1.2rem    
 }
 
+
 .oibContainer{
     display: flex;
     justify-content: center;
@@ -69,4 +70,16 @@ input{
     margin-top: 30px;
     flex-direction: column;   
     
+}
+
+
+.ant-table-header{
+    background: #f0f2f5 !important;
+}
+.ant-table{
+    background: #f0f2f5;
+}
+
+.ant-table-row:hover{
+    cursor: pointer;
 }

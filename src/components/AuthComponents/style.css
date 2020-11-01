@@ -1,0 +1,144 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(86,177,83,1) 0%, rgba(100,205,149,1) 29%, rgb(25, 117, 117) 100%);
+    background-size: 300% 300%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-animation: bg-animation 32s ease infinite;
+    -moz-animation: bg-animation 32s ease infinite;
+    animation: bg-animation 10s ease infinite;
+
+    
+}
+
+.btn_prijava{
+    margin-top: 70px;
+    height: 40px;
+    width: 110px;
+    background: linear-gradient(90deg, rgba(86,177,83,1) 0%, rgba(100,205,149,1) 29%, rgb(25, 117, 117) 100%);
+    background-size: 300% 300%;
+    border: 0px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    outline:none;
+    font-weight: 600;   
+    color: white;
+    transition: all 0.3s ease-in-out;
+    -webkit-animation: bg-animation 32s ease infinite;
+    -moz-animation: bg-animation 32s ease infinite;
+    animation: bg-animation 10s ease infinite;
+}
+
+.btn_prijava:hover{
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #38ef7d;
+    color: black;
+    animation: bg-animation 1s ease-in-out infinite;
+    
+}
+
+@-webkit-keyframes bg-animation {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@-moz-keyframes bg-animation {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@keyframes bg-animation {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+
+.formContainer{
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    background-color: white;
+    height: 550px;
+    width: 350px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;   
+}
+
+@media screen and (max-width: 580px) {
+    .formContainer{
+        height: 60%;
+        width: 80%;
+    }
+}
+
+
+
+.form__group{
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 70%;
+}
+
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: black;
+    padding: 7px 10px;
+
+    background: transparent;
+    transition: border-color 0.2s;
+    border-radius: 0px;    
+}
+.form__field::placeholder{
+    color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label{
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+  }
+
+
+.form__field:focus ~ .form__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #11998e;
+    font-weight:700; 
+}
+
+.form__field:focus{
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #11998e,#38ef7d);
+    border-image-slice: 1;
+}
+
+
+
+
