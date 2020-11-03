@@ -36,11 +36,13 @@ const DodajReciklazu = props => {
             setNewPerson(false)
             setOldPerson(false)
             setOib("")     
-            setAdded(true)       
+                  
         }
     },[recyclations])
 
-    
+    const addedFunc=()=>{
+        setAdded(true)
+    }
     const clicked = ()=>{
         if(oib.length <11 || oib.length >12){
             notification.error({
@@ -144,7 +146,7 @@ const DodajReciklazu = props => {
             </div> 
             {oldPerson && <PersonInfo />}
             {newPerson && <NewPersonForm oib={oib} /> }                      
-            {oldPerson && <ExistingPersonForm /> }    
+            {oldPerson && <ExistingPersonForm added={addedFunc}/> }    
             {added && <Recyclations/>}               
         </div>
     )

@@ -1,17 +1,15 @@
 import React,{ useEffect, useState, useContext} from 'react'
-import ReactDOM from 'react-dom';
+
 import RecContext from '../../context/recyclation-context'
 import {baseURL} from '../../constants'
 import { Table, Tag, Button,Popconfirm } from 'antd';
 import './dodajReciklazu/style/dodaj.css'
-import{
-    EditOutlined,
+import{    
     DeleteOutlined
 }from "@ant-design/icons";
 
 
-
-const Recyclations = ({choosen}) => {           
+const Recyclations = () => {           
     const {recyclations, recDispatch} = useContext(RecContext)
 
     const [data, setData] = useState("")
@@ -35,27 +33,11 @@ const Recyclations = ({choosen}) => {
                     recyclations: filtered
                 })
             }
-        })     
-        
-    }
-      
-    function cancel(props) {
-        
-        
-    }
-    /*
-    useEffect(()=>{
-        fetch(baseURL+"api/recyclations")
-        .then((res)=>res.json())
-        .then(recyclations=>recDispatch({
-            type: "POPULATE_RECYCLATIONS",
-            recyclations
-        })) 
-    },[])
-    */
-    useEffect(()=>{        
-        let tableData = recyclations.map((rec)=>{
-           const id = rec.id
+        })           
+    }  
+    useEffect(()=>{             
+        let tableData = recyclations.map((rec)=>{           
+           const key = rec.id
            const title = rec.category.title
            const catId = rec.category.id
            const category = {title,catId}
@@ -63,7 +45,7 @@ const Recyclations = ({choosen}) => {
            const firstName = rec.user.firstName
            const lastName = rec.user.lastName 
            const oib = rec.user.oib   
-           return {id,category,weight,firstName,lastName,oib}
+           return {key,category,weight,firstName,lastName,oib}
         })     
         setData(tableData)  
     },[recyclations])
@@ -90,19 +72,22 @@ const Recyclations = ({choosen}) => {
         },
         {
           title: 'Kategorija',
-          dataIndex: 'category',
+          dataIndex: 'category',          
           width: 130,
           render: category =>(                  
             <Tag color={colors[category.catId]} key={category.title}>
             {category.title.toUpperCase()}            
-            </Tag>    
-            
+            </Tag>              
           ),          
         },
         {
             title: 'Težina',
             dataIndex: 'weight',                  
             width: 90,
+            sorter: {
+                compare: (a, b) => a.weight - b.weight,
+                multiple: 3,
+              },
             render: weight =>(
                 <p style={{
                     marginTop: "12px",
@@ -121,10 +106,9 @@ const Recyclations = ({choosen}) => {
                 <Popconfirm                    
                     title="Jeste li sigurni?"
                     onConfirm={ ()=>{confirm(id)}  }
-                    onCancel={cancel}
+                    onCancel={()=>{}}
                     okText="Da"
-                    cancelText="Ne"
-                                       
+                    cancelText="Ne"                                       
                 >
                 <Button 
                 shape="circle"
@@ -136,24 +120,20 @@ const Recyclations = ({choosen}) => {
                  </Popconfirm>                  
                 </>
             ), 
-        },
-             
+        },             
       ];
     
     return(
         <>
         <Table 
-        columns={columns} 
-        dataSource={data}  
-        size="medium" 
-        pagination={{ pageSize: 50 }} 
-        scroll={{ y: 600 }} 
-        style={{
-            maxWidth: "60%", 
-            marginTop: "20px",
-            marginLeft: "auto",
-            marginRight: "auto"
-        }}
+            columns={columns} 
+            dataSource={data}  
+            size="small" 
+            pagination={{ pageSize: 50 }} 
+            scroll={{ y: 600}} 
+            style={{
+                marginTop:"20px"
+        }}        
         />,
         </>
     )

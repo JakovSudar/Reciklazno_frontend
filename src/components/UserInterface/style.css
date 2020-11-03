@@ -1,0 +1,8 @@
+.itemWrapper{
+    transform: scale(0.3);
+    
+    transition: transform 0.5s ease-in;
+    
+}
+
+

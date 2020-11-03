@@ -1,12 +1,13 @@
 import React,{useEffect, useState} from 'react'
 import fetcher from '../../helpers/fetcher'
 import CategoryItem from './CategoryItem'
-import {baseURL} from '../../constants'
+import './style.css'
 
 const UserStats = ({user}) => {
 
     const [sums, setSums] = useState("")
     const [loaded, setLoaded] = useState(false)
+   
     useEffect(()=>{
         fetcher("api/recyclations/users/"+ user.id+"/grouped")
         .then(res=>{
@@ -17,15 +18,27 @@ const UserStats = ({user}) => {
             setSums(res)
             setLoaded(true)
         })
-    },[])
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps  
 
-    return (
-        
+    useEffect(()=>{
+        let items = document.getElementsByClassName("itemWrapper")        
+        if(items.length === sums.length && items.length !== 0){
+            Array.from(items).forEach((el)=>{
+                el.style.transform = "scale(1)";                            
+            })
+            console.log("changed")            
+        }             
+    }) // eslint-disable-line react-hooks/exhaustive-deps  
+
+    return (        
         <div>
             {loaded &&
             sums.map((category)=>{
-                return <CategoryItem category={category} key={category.id}/>
-            })}
+                return (                    
+                    <CategoryItem category={category} key={category.id}/>                     
+                )
+            })            
+        }                         
         </div>
     )
 }

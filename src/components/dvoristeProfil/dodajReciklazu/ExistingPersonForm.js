@@ -8,7 +8,7 @@ import './style/dodaj.css'
 import fetcher from '../../../helpers/fetcher'
 const { Option } = Select;
 
-const ExistingPersonForm =(props) =>{
+const ExistingPersonForm =({added}) =>{
     
     const [categories, setCategories] = useState("")
     const {user} = useContext(ProfileContext)
@@ -33,12 +33,12 @@ const ExistingPersonForm =(props) =>{
           placement: "topRight"
         });
       }else{
-        const url = baseURL+"api/categories/"
+        
         const options ={
           method: "POST",
           body: JSON.stringify({title: newCategory})
         }
-        fetcher(url,options)
+        fetcher("api/categories/",options)
         .then(res=> res.json())
         .then(res=>{          
           merged.push(res)
@@ -52,7 +52,7 @@ const ExistingPersonForm =(props) =>{
       const requestBody = values.recyclations.map((val)=>{
           return {...val,
           user_id: user.id,
-          dvoriste_id: 1
+          dvoriste_id: localStorage.userId
       }})     
     
       fetch(baseURL+"api/recyclations/",
@@ -77,7 +77,8 @@ const ExistingPersonForm =(props) =>{
               description:
                 "",
               placement: "topRight"
-            });            
+            });   
+              added()         
               return res.json()
           }
       })

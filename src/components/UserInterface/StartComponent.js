@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Input, Button, notification } from 'antd';
+import React, { useState} from 'react'
+import { Input, Button } from 'antd';
+import { useHistory} from 'react-router-dom';
 import{
-    RightCircleOutlined
+    RightCircleOutlined,
+    HomeOutlined
 }from "@ant-design/icons";
 import '../style.css';
 import fetcher from '../../helpers/fetcher'
@@ -11,10 +13,11 @@ import UserStats from './UserStats'
 
 const StartComponent = () => {
     const [oib, setOib] = useState("59336824559")    
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const [foundUser, setFoundUser] = useState("")
+    const history = useHistory()
 
-    const [disabledInput, setDisabledInput] = useState(false)
+    const [disabledInput] = useState(false)
 
     const clicked = ()=>{
         if(checkOIB(oib)){          
@@ -48,6 +51,8 @@ const StartComponent = () => {
                 onPressEnter = {clicked}
                 onChange = {(e)=>{                                     
                     setOib(e.target.value)
+                    setFoundUser("")
+                    
                 }}
                 disabled = {disabledInput}
                 type="number" />
@@ -65,6 +70,17 @@ const StartComponent = () => {
                 </div>
                 {foundUser && <UserStats user={foundUser}/>}
             </div> 
+            <Button
+                style={{
+                    position:"fixed",
+                    top:"10px",
+                    right:"10px"
+                }}
+                shape="circle"
+                size="large"
+                onClick={()=>{history.push("/")}}
+                icon={<HomeOutlined />}
+                ></Button>
             
         </div>
     )

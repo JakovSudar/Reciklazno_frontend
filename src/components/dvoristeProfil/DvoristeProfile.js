@@ -1,9 +1,9 @@
 import React from "react";
 import "antd/dist/antd.css";
 import DvoristeContent from "./DvoristeContent"
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './style/dvoristeProfil.css'
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import ProfileMenu from './ProfilMenu'  
 const {  Content, Sider } = Layout;
 const DvoristeProfil = () =>{
@@ -18,7 +18,7 @@ const DvoristeProfil = () =>{
       breakpoint={"sm"}
       collapsedWidth={0}
       style={{
-        height: "100vh"
+        minHeight: "100vh"
       }}
       >      
         <ProfileMenu/>

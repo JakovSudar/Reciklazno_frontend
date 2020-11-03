@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Zajednica(props) {
+
+function Zajednica() {
     return (
         <div>
             Zajednica

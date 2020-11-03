@@ -1,0 +1,24 @@
+.circleContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 900px
+}
+
+.circle-item{
+    display:"flex";
+    justify-content: "space-evenly";
+    flex-wrap: "wrap";    
+    margin : 4px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    transition: all 0.2s;
+}
+
+.circle-item:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    background-color: #e0e2e6;
+}
