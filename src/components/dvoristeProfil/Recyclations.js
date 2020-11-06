@@ -37,7 +37,7 @@ const Recyclations = () => {
     }  
     useEffect(()=>{             
         let tableData = recyclations.map((rec)=>{           
-           const key = rec.id
+           const id = rec.id
            const title = rec.category.title
            const catId = rec.category.id
            const category = {title,catId}
@@ -45,35 +45,29 @@ const Recyclations = () => {
            const firstName = rec.user.firstName
            const lastName = rec.user.lastName 
            const oib = rec.user.oib   
-           return {key,category,weight,firstName,lastName,oib}
+           return {id,category,weight,firstName,lastName,oib}
         })     
         setData(tableData)  
+
     },[recyclations])
 
     const colors= ["magenta","geekblue",  "gold", "lime", "green", "cyan" , "purple"]
     const columns = [
         {
           title: 'Ime',
-          dataIndex: 'firstName',
-          width: 130
-          
+          dataIndex: 'firstName',       
         },
         {
           title: 'Prezime',
           dataIndex: 'lastName',
-          width: 130
-        
         },
         {
             title: 'OIB',
-            dataIndex: 'oib',
-            width: 180
-            
+            dataIndex: 'oib',  
         },
         {
           title: 'Kategorija',
-          dataIndex: 'category',          
-          width: 130,
+          dataIndex: 'category',                   
           render: category =>(                  
             <Tag color={colors[category.catId]} key={category.title}>
             {category.title.toUpperCase()}            
@@ -82,8 +76,7 @@ const Recyclations = () => {
         },
         {
             title: 'Težina',
-            dataIndex: 'weight',                  
-            width: 90,
+            dataIndex: 'weight',                            
             sorter: {
                 compare: (a, b) => a.weight - b.weight,
                 multiple: 3,
@@ -99,8 +92,7 @@ const Recyclations = () => {
         },
         {
             title: "",
-            dataIndex: "id",
-            width: 90,
+            dataIndex: "id",            
             render: id =>(
                 <>                                 
                 <Popconfirm                    
@@ -129,11 +121,8 @@ const Recyclations = () => {
             columns={columns} 
             dataSource={data}  
             size="small" 
-            pagination={{ pageSize: 50 }} 
-            scroll={{ y: 600}} 
-            style={{
-                marginTop:"20px"
-        }}        
+            pagination={{ pageSize: 10 }} 
+            scroll={{ y: 600}}                
         />,
         </>
     )

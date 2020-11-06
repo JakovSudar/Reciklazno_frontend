@@ -21,6 +21,7 @@ input{
 .oibContainer{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 
 }
 .oibBtn{
@@ -78,6 +79,7 @@ input{
 }
 .ant-table{
     background: #f0f2f5;
+    max-width: 100%;
     
 }
 .ant-table-wrapper {
@@ -95,4 +97,80 @@ input{
 
 .ant-table-row:hover{
     cursor: pointer;
+}
+
+
+.ant-table {
+    display: block;
+  }
+  @media screen and (max-width: 910px) {
+    .ant-table-thead {
+      display: none;
+    }
+    .ant-table-thead > tr th:first-of-type,
+    .ant-table-tbody > tr th:first-of-type,
+    .ant-table-thead > tr td:first-of-type,
+    .ant-table-tbody > tr td:first-of-type {
+      padding-top: 0.5rem;
+    }
+    .ant-table-tbody >tr:first-of-type{
+        display: none;
+    }
+
+    .ant-table-thead > tr th:last-of-type,
+    .ant-table-tbody > tr th:last-of-type,
+    .ant-table-thead > tr td:last-of-type,
+    .ant-table-tbody > tr td:last-of-type {
+      padding-bottom: 1rem;
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > th,
+    .ant-table-thead > tr > td,
+    .ant-table-tbody > tr > td {
+      display: block;
+      width: auto !important;
+      border: none;
+      padding: 0 1rem;
+      font-size: 1rem;
+    }
+    .ant-table-thead > tr > th:last-child,
+    .ant-table-tbody > tr > th:last-child,
+    .ant-table-thead > tr > td:last-child,
+    .ant-table-tbody > tr > td:last-child {
+        box-shadow: 1px 8px 5px -7px rgba(0, 0, 0, 0.322);
+    }
+    .ant-table-cell{
+        text-align: center;
+    }
+
+    .ant-table-tbody > tr >td:first-of-type    
+    {
+        display: inline-block;
+        width: 50% !important;
+        text-align: right;
+        padding-right: 4px !important;
+    }
+    .ant-table-tbody > tr >td:nth-of-type(2){
+        display: inline-block;
+        width: 50% !important;
+        text-align: left;
+        padding-left: 4px !important;
+    }
+    .ant-table-tbody > tr >td:last-of-type
+    
+    {
+        padding-top: 0px !important;
+    }
+
+    .ant-table-cell >button{
+        margin-left: 0px !important;
+    }
+    .ant-table-row:hover{
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+  }
+
+  
+.natural-moving{
+    transition: all 0.4s ease-in;
 }

@@ -32,21 +32,25 @@ const ExistingPersonForm =({added}) =>{
           message: `Prazan input`,          
           placement: "topRight"
         });
-      }else{
-        
+      }else{        
         const options ={
           method: "POST",
-          body: JSON.stringify({title: newCategory})
+          body: JSON.stringify({title: newCategory}),
+          headers:{
+            "Content-Type": "application/json"
+          }
         }
         fetcher("api/categories/",options)
-        .then(res=> res.json())
-        .then(res=>{          
-          merged.push(res)
-          setCategories(merged)
-        })    
-    
-      }     
-      
+        .then(res=>{if(res.status === 200) return res.json();  return null})
+        .then(res=>{  
+          console.log(res)
+          if(res!==null){
+            console.log(res)
+            merged.push(res)
+            setCategories(merged)
+          }                 
+        })   
+      }           
     }
     const onFinish = values => {            
       const requestBody = values.recyclations.map((val)=>{
@@ -93,16 +97,21 @@ const ExistingPersonForm =({added}) =>{
     return (     
         <>          
         <Form 
+        className="ulaz-dole"
         name="dynamic_form_item"          
         onFinish={onFinish}>
             <Form.List            
             name="recyclations"        
             >            
                 {(fields, { add, remove }, { errors }) => (
-                <>                
+                <>               
                 {fields.map((field, index) => (                        
-                    <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                    <Space
+                    className ="ulaz-dole-margin"                  
+                    id={"formItem"+ index}
+                    key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
                         <Form.Item
+                        className = "ulaz-desno-veliki"
                         {...field}
                         name={[field.name, 'category_id']}
                         fieldKey={[field.fieldKey, 'category']}
@@ -142,6 +151,7 @@ const ExistingPersonForm =({added}) =>{
                             </Select>              
                         </Form.Item>
                         <Form.Item
+                        className="ulaz-gore"
                             {...field}
                             name={[field.name, 'weight']}
                             fieldKey={[field.fieldKey, 'weight']}
@@ -151,17 +161,32 @@ const ExistingPersonForm =({added}) =>{
                                 type="number"
                                 placeholder="kg"
                                 style={{
+                                  
                                     width:"70px",
                                     marginLeft:"6px"                                
                                 }}
                             />
                         </Form.Item>
-                        <DeleteOutlined 
+                        <div
+                        id={"deleteBtn" + index}
+                        className="ulaz-gore">
+                        <DeleteOutlined                         
                         key=""
                         style={{marginLeft: '5px', color:'red'}}
                         className="dynamic-delete-button"
-                        onClick={() => remove(field.name)}
+                        onClick={() => {
+                          var el = document.getElementById("formItem"+index)
+                          
+                            el.classList.remove("ulaz-dole-margin")
+                            el.classList.add("skupljanje")
+                            setTimeout(()=>{
+                              remove(field.name)
+                            },280)
+                          
+                        }}
                         />
+                        </div>
+                       
                     </Space>                                                         
                 ))}
        

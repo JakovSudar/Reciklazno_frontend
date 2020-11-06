@@ -8,15 +8,22 @@ import {  UserOutlined } from '@ant-design/icons';
 const HomePage = () => {
     const history = useHistory()
     return (
-        <div className="home-page gradient_bg">
+        <div  className="home-page gradient_bg">
+            <div 
+            id="homePage">                       
             <div className="naslov_container">
-                <h1 className="naslov">Reciklirajmo.hr</h1>  
-                <p className="citat">Živim, dakle, recikliram</p> 
-            
-            
-            <Button onClick={()=>{history.push("/start")}}  shape="round" ghost className="start_btn">Kreni</Button>
+                <h1 className="naslov ulaz-desno">Reciklirajmo.hr</h1>  
+                <p className="citat ulaz-dole">Živim, dakle, recikliram</p> 
+          
+            <Button onClick={()=>{                              
+                    history.push("/start")                              
+            }}  
+            shape="round" 
+            ghost 
+            className="start_btn">Kreni</Button>
             </div>
             <Button
+            id="loginBtn"
             style={{
                 position:"fixed",
                 top:"10px",
@@ -27,6 +34,7 @@ const HomePage = () => {
             onClick={()=>{history.push("/login/")}}
             icon={<UserOutlined />}
             ></Button>
+            </div>
         </div>
     )
 }

@@ -138,3 +138,29 @@ input{
     background-color: white !important;
 }
 
+@keyframes layout-out-left {
+    0% {      
+      transform: opacity(1);
+    }
+    100% {       
+      transform: opacity(0);
+    }
+}
+@keyframes layout-in-right {
+    0% {      
+        transform: opacity(0);
+      }
+      100% {       
+        transform: opacity(1);
+      }
+}
+.layout-in-right{
+    animation: layout-in-right 0.2s ease-in;
+}
+
+.layout-out-left{
+    animation: layout-out-left 0.2s ease-in;
+}
+
+
+

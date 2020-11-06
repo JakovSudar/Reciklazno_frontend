@@ -17,6 +17,7 @@ import ProfileContext from '../../context/profile-context'
     
     return (
         <div
+        className="ulaz-dole"
         style={{
             marginTop: "20px",
             display:"flex",

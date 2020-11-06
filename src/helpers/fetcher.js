@@ -6,15 +6,14 @@ function updateOptions(options){
        update.headers = {
            ...update.headers,
            'Cache-Control': 'no-cache',
-           'Access-Control-Allow-Origin': '*',
-           'Content-Type': 'application/json'
+           'Access-Control-Allow-Origin': '*',           
        } 
     if(localStorage.token){
         update.headers ={
             ...update.headers,
             Authorization: localStorage.token
         };
-    }
+    }    
     return update;
 }
 

@@ -7,7 +7,9 @@ const recyclationReducer = (state, action) => {
             return [
                 ...state,
                 {}
-            ]        
+            ]
+        case 'REMOVE_RECYCLATIONS':
+            return []        
     }
 }
 

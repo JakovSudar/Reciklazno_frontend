@@ -117,7 +117,13 @@ const DodajReciklazu = props => {
     }   
 
     return (
-        <div>
+        <div
+        style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            maxWidth:"100%"
+        }}>
             <div className="oibContainer">
                 <Input
                 className="oibInput"

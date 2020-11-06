@@ -1,42 +1,22 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useRef} from 'react'
 import { Progress } from 'antd';
 
-const CircleProgress = ({rec, min, max}) => {   
-    
-
-    const [prog, setprog] = useState(100)
-
-    /*useEffect(() => {
-        const interval = setInterval(() => {
-          setprog(prog => prog+2);          
-        }, 20);
-        
-        return () => clearInterval(interval);
-      }, []);*/
-
-    
-    const clicked= ()=>{
-        
-    }
-    const normalised = (rec.sum - min)/ (max-min)*100
-    const roundedWeight = Math.round(rec.sum * 100) / 100
+const CircleProgress = ({rec, min, classNm="circle-item-black", max, flex="1 0 18%" ,weight=true ,openModal = ()=>{}}) => {   
+    min = Math.round(min * 100) / 100
+    const normalised = (rec.sum - min)/ (max-min)*100   
+    const roundedWeight = Math.round(rec.sum * 100) / 100    
     return (
         <div  
-        onClick={clicked}        
+        onClick={()=>{openModal(rec)}}      
         key={rec.categoryId}
-        className="circle-item"
-        style={{
-            display:"flex",
-            flexDirection:"column",
-            alignItems:"center",
-            flex: "1 0 18%",
-            
-        }}>
+        id={rec.categoryId}
+        className={classNm + " circle-item circle-item-18 ulaz-desno"}
+       >
             <p
             style={{
                 fontWeight:"600",
-                marginBottom:"2px"
-
+                marginBottom:"2px",
+                textAlign: "center"
             }}>{rec.title}</p>
             <Progress                       
             strokeColor={{                            
@@ -44,11 +24,11 @@ const CircleProgress = ({rec, min, max}) => {
                 '100%': '#87d068',
             }}  
             type="circle"
-            percent={prog<normalised? prog: normalised}
+            percent={roundedWeight===min?0.1:normalised}
             format={
                 () => 
                 <> 
-                    {prog/5<roundedWeight? prog/5 : roundedWeight} kg 
+                    {roundedWeight} {weight && "kg"} 
                     <p style={{
                         marginBottom:"0px", 
                         fontSize:"0.9rem",

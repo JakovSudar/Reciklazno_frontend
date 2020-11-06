@@ -4,6 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import {baseURL,baseAppURL} from '../../constants'
 import {message, Button } from 'antd';
 import {  HomeOutlined } from '@ant-design/icons';
+import fetcher from '../../helpers/fetcher'
 
 
 const LoginPage = () => {
@@ -24,19 +25,24 @@ const LoginPage = () => {
             {
                 method:"POST",                
                 body: (data)
-            })
+            })            
             .then(res=>{
+                
                 if(res.status===200){
                     return res.json()
                 }else{
                     return null
                 }
             })
-            .then(res=>{                
-                localStorage.setItem('userId', res.id)
-                localStorage.setItem('username', res.username)
-                localStorage.setItem('token', res.token)
-                window.location.replace(baseAppURL+"profile");
+            .then(res=>{   
+                if(res!==null){
+                    localStorage.setItem('userId', res.id)
+                    localStorage.setItem('username', res.username)
+                    localStorage.setItem('token', res.token)
+                    localStorage.setItem('title', res.title)
+                    window.location.replace(baseAppURL+"profile");
+                }             
+               
             })
         }
     }

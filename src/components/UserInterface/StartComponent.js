@@ -41,7 +41,11 @@ const StartComponent = () => {
         }        
     }
     return (
-        <div className="start_page gradient_bg">
+        <div        
+        className="start_page gradient_bg ">
+        <div
+        className="layout-in-right">
+        
             <div >     
                 <div className="oibContainer" id="oibContainer">           
                 <Input
@@ -71,6 +75,7 @@ const StartComponent = () => {
                 {foundUser && <UserStats user={foundUser}/>}
             </div> 
             <Button
+                
                 style={{
                     position:"fixed",
                     top:"10px",
@@ -81,7 +86,7 @@ const StartComponent = () => {
                 onClick={()=>{history.push("/")}}
                 icon={<HomeOutlined />}
                 ></Button>
-            
+            </div>
         </div>
     )
 }
