@@ -45,7 +45,7 @@ function RazdobljeStatistika() {
                 })
             }) 
         }       
-    },[endDate]) // eslint-disable-line react-hooks/exhaustive-deps  
+    },[startDate, endDate]) // eslint-disable-line react-hooks/exhaustive-deps  
 
     useEffect(()=>{       
         if(startDate!==""){
@@ -76,6 +76,7 @@ function RazdobljeStatistika() {
     }
 
     const onChange = (dates, dateString)=>{
+        console.log("promjena")
         setstartDate(dateString[0])
         setendDate(dateString[1])       
     }
@@ -106,8 +107,7 @@ function RazdobljeStatistika() {
             onCancel={()=>setvisible(false)}
             sumAll={sumall}
             />            
-            <RangePicker       
-            
+            <RangePicker                 
             onChange={onChange}
             style={{
                 marginBottom:"10px",
@@ -116,9 +116,7 @@ function RazdobljeStatistika() {
             />
             <button
             className="yearBtn"
-            onClick={yearClicked}
-                
-            
+            onClick={yearClicked}                            
             >
             Cijela godina
             </button>
